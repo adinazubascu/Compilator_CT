@@ -1,5 +1,9 @@
 a;
-b = 0123;
+b = 12.3e+33;
+c="Hello \n world"
+d='\n'
+e='sb'
+f='a\b'
 if (b > 6) {
     b = b / 1;
 }

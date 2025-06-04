@@ -423,6 +423,23 @@ public class Lexical {
 
                  // DECIMAL parsing
                  if (token.intType == Token.IntType.DECIMAL) {
+
+
+                     // Real number
+                     if (character == '.') {
+                         token.type = Token.IDs.CONST_REAL;
+                         token.intType = Token.IntType.REAL;
+                         token.text += character;
+                         break;
+                     }
+
+                     if (character == 'e' || character == 'E') {
+                         token.type = Token.IDs.CONST_REAL;
+                         token.intType = Token.IntType.REAL;
+                         token.exponentPresent = true;
+                         token.text += character;
+                         break;
+                     }
                      if (Character.isDigit(character)) {
                          token.text += character;
                          break;
@@ -441,11 +458,131 @@ public class Lexical {
 
                       break;
 
+             case CONST_REAL:
+
+                 if (character == '.') {
+                     if (token.exponentPresent) {
+                         token.setError("Invalid real number: dot after exponent");
+                         tokens.add(token);
+                         token = CreateTokens(new Token(token.myLine), character);
+                         break;
+                     }
+                     if (token.text.contains(".")) {
+                         token.setError("Invalid real number: multiple dots");
+                         tokens.add(token);
+                         token = CreateTokens(new Token(token.myLine), character);
+                         break;
+                     }
+                     token.intType = Token.IntType.REAL;
+                     token.text += character;
+                     break;
+                 }
+
+                 if (character == 'e' || character == 'E') {
+                     if (token.exponentPresent) {
+                         token.setError("Invalid real number: multiple exponents");
+                         tokens.add(token);
+                         token = CreateTokens(new Token(token.myLine), character);
+                         break;
+                     }
+                     token.exponentPresent = true;
+                     token.intType = Token.IntType.REAL;
+                     token.text += character;
+                     break;
+                 }
+
+                 if (character == '+' || character == '-') {
+                     if (token.text.endsWith("e") || token.text.endsWith("E")) {
+                         token.text += character;
+                         break;
+                     } else {
+                         tokens.add(token);
+                         token = CreateTokens(new Token(token.myLine), character);
+                         break;
+                     }
+                 }
+
+                 if (Character.isDigit(character)) {
+                     token.intType = Token.IntType.REAL;
+                     token.text += character;
+                     break;
+                 }
+
+                 // Finalize token on invalid character
+                 tokens.add(token);
+                 token = CreateTokens(new Token(token.myLine), character);
+                 break;
+
+
+             case CONST_CHAR:
+                 if (token.expectingEscape) {
+                     String escapeSeq = "\\" + character;
+                     if (!formatParams.contains(escapeSeq)) {
+                         token.setError("Invalid char formatter");
+                     }
+                     token.text += formatString(escapeSeq);
+                     token.expectingEscape = false;
+                     break;
+                 }
+
+                 if (character == '\\') {
+                     token.expectingEscape = true;
+                     break;
+                 }
+
+                 if (character == '\'') {
+                     if (token.text.isEmpty()) {
+                         token.setError("Empty char literal");
+                     } else if (token.text.length() > 1) {
+                         token.setError("Too many characters in char literal");
+                     }
+                     tokens.add(token);
+                     token = new Token(token.myLine);
+                     break;
+                 }
+
+                 if (!token.text.isEmpty()) {
+                     token.setError("Invalid char literal length");
+                 }
+
+                 token.text += character;
+                 break;
+
+             case CONST_STRING:
+                 if (token.expectingEscape) {
+                     String escapeSeq = "\\" + character;
+
+                     if (formatParams.contains(escapeSeq)) {
+                         token.text += formatString(escapeSeq);
+                     } else {
+                         token.setError("Invalid string escape sequence");
+                         token.text += escapeSeq; // still include it for debugging
+                     }
+
+                     token.expectingEscape = false;
+                     break;
+                 }
+
+                 if (character == '\\') {
+                     token.expectingEscape = true;
+                     break;
+                 }
+
+                 if (character == '\"') {
+                     tokens.add(token);
+                     token = new Token(token.myLine);
+                     break;
+                 }
+
+                 token.text += character;
+                 break;
+
              default:break;
 
          }
         return token;
     }
+
     public static boolean isKeyWord(Token token) {
         switch (token.text) {
             case "if":
@@ -486,22 +623,85 @@ public class Lexical {
         }
         return true;
     }
+    private static String formatString(String end) {
+
+        int c;
+        switch (end) {
+
+            case "\\'":
+                c = 0x27;
+                break;
+            case "\\\"":
+                c = 0x22;
+                break;
+
+            case "\\?":
+                c = 0x3f;
+                break;
+
+            case "\\\\":
+                c = 0x5c;
+                break;
+            case "\\a":
+                c = 0x07;
+                break;
+
+            case "\\b":
+                c = 0x08;
+            case "\\f":
+                c = 0x0c;
+                break;
+
+            case "\\n":
+                c = 0x0a;
+                break;
+            case "\\r":
+                c = 0x0d;
+                break;
+            case "\\t":
+                c = 0x09;
+                break;
+
+            case "\\v":
+                c = 0x0b;
+                break;
+            default:
+                // System.out.print("blsfaf");
+                return end;
+        }
+
+        return "" + (char) c;
+
+    }
 
     public static void main(String[] args) {
-            try {
-                File file = new File("C:\\Users\\ADINA\\IdeaProjects\\CTproject\\src\\input.txt");
-                Lexical lexical = new Lexical(file);
-                lexical.compile();
+        try {
+            File file = new File("C:\\Users\\ADINA\\IdeaProjects\\CTproject\\src\\input.txt");
+            Lexical lexical = new Lexical(file);
+            lexical.compile();
 
+            for (Token t : lexical.getTokens()) {
+                System.out.println(t);
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Input file not found.");
+        }
+        for (int i = 0; i <= 9; i++) {
+
+            File file = new File("C:\\Users\\ADINA\\IdeaProjects\\CTproject\\out\\production\\CCodeTest\\" + i + ".c");
+            Lexical lexical = new Lexical(file);
+            try {
+                lexical.compile();
                 for (Token t : lexical.getTokens()) {
                     System.out.println(t);
                 }
-
             } catch (FileNotFoundException e) {
-                System.out.println("Input file not found.");
+
+                e.printStackTrace();
             }
         }
 
-
+    }
 
 }
