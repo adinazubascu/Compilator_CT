@@ -8,7 +8,7 @@ public class Lexical {
 
 
 
-    private List<Token> tokens = new ArrayList<Token>();
+    public List<Token> tokens = new ArrayList<Token>();
     private File sourceFile;
     private List<String> formatParams = Arrays
             .asList(new String[] { "\\a", "\\b", "\\f", "\\n", "\\r", "\\t", "\\v", "\\\\", "\\'", "\\\"", "\\?" });
@@ -676,7 +676,7 @@ public class Lexical {
 
     public static void main(String[] args) {
         try {
-            File file = new File("C:\\Users\\ADINA\\IdeaProjects\\CTproject\\src\\input.txt");
+            File file = new File("C:\\Users\\Sandy\\IdeaProjects\\Compilator_CT\\src\\input.txt");
             Lexical lexical = new Lexical(file);
             lexical.compile();
 
@@ -687,9 +687,9 @@ public class Lexical {
         } catch (FileNotFoundException e) {
             System.out.println("Input file not found.");
         }
-        for (int i = 0; i <= 9; i++) {
+     /*   for (int i = 0; i <= 9; i++) {
 
-            File file = new File("C:\\Users\\ADINA\\IdeaProjects\\CTproject\\out\\production\\CCodeTest\\" + i + ".c");
+            File file = new File("C:\\Users\\Sandy\\IdeaProjects\\Compilator_CT\\src\\input.txt" + i + ".c");
             Lexical lexical = new Lexical(file);
             try {
                 lexical.compile();
@@ -700,7 +700,7 @@ public class Lexical {
 
                 e.printStackTrace();
             }
-        }
+        }*/
 
     }
 

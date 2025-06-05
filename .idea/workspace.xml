@@ -5,9 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c4348fc-b07e-4f63-a54a-a36e50693179" name="Changes" comment="Partial lexical">
+      <change afterPath="$PROJECT_DIR$/src/CCodeTest/0.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CCodeTest/1.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CCodeTest/2.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CCodeTest/3.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CCodeTest/4.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CCodeTest/5.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CCodeTest/6.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CCodeTest/7.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CCodeTest/8.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CCodeTest/9.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParseException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Parser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Syntactic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Lexical.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lexical.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/input.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +42,6 @@
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="2xxNSExacZjXWkDNdg0cMGnaAix" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -36,10 +49,13 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Lexical.executor": "Run",
+    "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ADINA/IdeaProjects/CTproject/out/production",
+    "last_opened_file_path": "C:/Users/Sandy/IdeaProjects/Compilator_CT/src/CCodeTest",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -50,10 +66,12 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Sandy\IdeaProjects\Compilator_CT\src\CCodeTest" />
+      <recent name="C:\Users\Sandy\IdeaProjects\Compilator_CT\src" />
       <recent name="C:\Users\ADINA\IdeaProjects\CTproject\out\production" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Lexical" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Lexical" />
       <module name="CTproject" />
@@ -61,8 +79,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="CTproject" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Lexical" />
       </list>
     </recent_temporary>
@@ -70,8 +96,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.26094.121" />
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-IU-251.26094.121" />
       </set>
     </attachedChunks>
   </component>
@@ -85,6 +111,7 @@
       <updated>1748875766150</updated>
       <workItem from="1748875767270" duration="18713000" />
       <workItem from="1749019193510" duration="3139000" />
+      <workItem from="1749077711578" duration="9220000" />
     </task>
     <task id="LOCAL-00001" summary="Partial lexical">
       <option name="closed" value="true" />
